@@ -1,0 +1,119 @@
+#! C:/Program Files/Nuke9.0v8/nuke-9.0.8.dll -nx
+version 9.0 v8
+Group {
+ label "Skip Frame: \[value skipFrame]"
+ addUserKnob {20 User}
+ addUserKnob {3 skipFrame l "Skip Frame"}
+ skipFrame 4497
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x8e8e3800
+  note_font_size 42
+  xpos 220
+  ypos -476
+  bdwidth 425
+  bdheight 499
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 230
+  ypos -448
+ }
+ Dot {
+  name Dot1
+  xpos 264
+  ypos -315
+ }
+set N3f6e000 [stack 0]
+ Dot {
+  name Dot2
+  xpos 367
+  ypos -315
+ }
+set N62845c00 [stack 0]
+ Dot {
+  name Dot3
+  xpos 589
+  ypos -315
+ }
+ FrameRange {
+  first_frame {{skipFrame+1}}
+  last_frame {{last_frame}}
+  time ""
+  name FrameRange3
+  xpos 555
+  ypos -210
+ }
+ Dot {
+  name Dot5
+  xpos 589
+  ypos -3
+ }
+push $N62845c00
+ Kronos {
+    input.last 4822
+    retimedChannels all
+    timing2 Frame
+    timingFrame2 {{skipFrame+.5}}
+    showLegacyMode false
+    vectorDetailLocal 0.4
+    resampleType Lanczos6
+    Shutter 1
+    Advanced 1
+    legacyModeNuke9 false
+    name Kronos1
+    selected true
+    xpos 383
+    ypos -234
+ }
+ FrameRange {
+  first_frame {{skipFrame}}
+  last_frame {{skipFrame}}
+  time ""
+  name FrameRange2
+  xpos 383
+  ypos -187
+ }
+push $N3f6e000
+ FrameRange {
+  first_frame {{first_frame}}
+  last_frame {{skipFrame}}
+  time ""
+  name FrameRange1
+  xpos 230
+  ypos -211
+ }
+ Dot {
+  name Dot4
+  xpos 264
+  ypos -3
+ }
+ AppendClip {
+  inputs 3
+  firstFrame {{first_frame-1}}
+  meta_from_first false
+  time ""
+  name AppendClip1
+  xpos 392
+  ypos -7
+ }
+set N62844800 [stack 0]
+ Output {
+  name Output1
+  xpos 333
+  ypos 93
+ }
+push $N62844800
+push $N62844800
+ Viewer {
+  inputs 2
+  frame_range -1-4822
+  input_number 1
+  name Viewer1
+  xpos 333
+  ypos 158
+ }
+end_group
